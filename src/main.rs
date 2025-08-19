@@ -1,9 +1,5 @@
-mod config;
-mod connection;
-mod server;
-
-use crate::config::ServerConfig;
-use crate::server::TcpServer;
+use tcp_server::config::ServerConfig;
+use tcp_server::server::TcpServer;
 
 #[tokio::main]
 async fn main() -> std::io::Result<()> {
