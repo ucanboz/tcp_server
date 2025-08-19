@@ -17,6 +17,6 @@ impl ServerConfig {
             .and_then(|s| s.parse().ok())
             .unwrap_or(100);
 
-        Self { addr, max_concurrency }
+        Self {addr, max_concurrency }
     }
 }

@@ -1,4 +1,4 @@
-use crate::{config::ServerConfig, connection::handle_connection};
+use crate::{config::ServerConfig, connection::handle_connection, gpio::gpio_blink_task};
 use std::sync::Arc;
 use tokio::{
     net::TcpListener,
@@ -22,6 +22,11 @@ impl TcpServer {
             "Listening on {} with max {} concurrent connections…",
             self.config.addr, self.config.max_concurrency
         );
+
+        // spawn background GPIO blinker
+        tokio::spawn(async {
+            gpio_blink_task().await;
+        });
 
         // Wrap semaphore in Arc so it can be cloned and shared with tasks
         let limiter = Arc::new(Semaphore::new(self.config.max_concurrency));
