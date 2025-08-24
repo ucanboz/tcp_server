@@ -10,7 +10,7 @@ pub async fn handle_connection(stream: TcpStream) -> io::Result<()> {
     let mut lines = BufReader::new(reader).lines();
 
     while let Some(line) = lines.next_line().await? {
-        let response = format!("{line}\n");
+        let response = format!("ST: {line}\n");
         writer.write_all(response.as_bytes()).await?;
         writer.flush().await?;
     }
