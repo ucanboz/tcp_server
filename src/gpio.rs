@@ -35,4 +35,11 @@ pub async fn gpio_blink_task() {
 
         sleep(Duration::from_millis(500)).await;
     }
+
+    // never reached, but just in case, set LOW on exit
+    if let Err(e) = output.set_values([false])
+        {
+            eprint!("Warning: Failed to set GPIO LOW: {e}");
+        };
+
 }
