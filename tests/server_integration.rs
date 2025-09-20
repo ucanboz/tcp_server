@@ -41,7 +41,7 @@ async fn run_echo_test(addr: &str) {
     writer.flush().await.unwrap();
 
     let response = lines.next_line().await.unwrap().unwrap();
-    assert_eq!(response, "addr_test");
+    assert_eq!(response, "ST: addr_test");
 }
 
 #[tokio::test]
